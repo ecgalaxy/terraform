@@ -1,0 +1,20 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Check binary file
+      stat:
+        path: /usr/bin/terraform
+      register: bin
+    - name: Assert that terraform is installed
+      assert:
+        that:
+          - "bin.stat.exists"
+    - name: Check terraform execution
+      command: terraform -version
+      register: output
+    - name: Assert that terraform is installed
+      assert:
+        that:
+        - "'Terraform' in output.stdout"

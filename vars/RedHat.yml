@@ -1,0 +1,3 @@
+---
+hashicorp_repository: "https://rpm.releases.hashicorp.com"
+hashicorp_rpm_family: "RHEL"

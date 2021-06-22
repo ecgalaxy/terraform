@@ -21,10 +21,10 @@ Dependencies
 Example Playbook
 ----------------
 
-- hosts: all
-  roles:
-    - ecgalaxy.bootstrap
-    - ecgalaxy.terraform
+    - hosts: all
+      roles:
+        - ecgalaxy.bootstrap
+        - ecgalaxy.terraform
 
 License
 -------

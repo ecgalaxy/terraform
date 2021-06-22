@@ -1,0 +1,39 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Include Distribution-specific variables (Amazon Linux)
+  include_vars: "{{ ansible_distribution }}.yml"
+  when: ansible_distribution == 'Amazon'
+
+- name: Import key (APT)
+  apt_key:
+    url: "{{ hashicorp_repository }}/gpg"
+    state: present
+  become: true
+  when: ansible_os_family == 'Debian'
+
+- name: Enable hashicorp repository (APT)
+  apt_repository:
+    repo: "deb [arch=amd64] {{ hashicorp_repository }} {{ ansible_distribution_release | lower }} main"
+    filename: hashicorp
+    state: present
+  become: true
+  when: ansible_os_family == 'Debian'
+
+- name: Enable hashicorp repository (Yum)
+  yum_repository:
+    name: hashicorp
+    description: HashiCorp repository
+    state: present
+    baseurl: "{{ hashicorp_repository }}/{{ hashicorp_rpm_family }}/$releasever/$basearch/stable"
+    gpgkey: "{{ hashicorp_repository }}/gpg"
+    gpgcheck: yes
+  become: true
+  when: ansible_os_family == 'RedHat'
+
+- name: Install terraform
+  package:
+    name: terraform
+    state: present
+  become: true
