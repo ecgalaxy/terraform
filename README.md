@@ -16,15 +16,14 @@ See `vars` folder.
 Dependencies
 ------------
 
-* ecgalaxy.bootstrap
+None.
 
 Example Playbook
 ----------------
 
     - hosts: all
       roles:
-        - ecgalaxy.bootstrap
-        - ecgalaxy.terraform
+        - terraform
 
 License
 -------
