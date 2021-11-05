@@ -1,0 +1,89 @@
+---
+
+- name: Tflint remove previous version
+  file:
+    path: "{{ terraform_tflint_install_basedir }}" 
+    state: absent
+  become: yes
+  when: terraform_tflint_remove_previous_versions
+
+- name: Tfsec remove previous version
+  file:
+    path: "{{ terraform_tfsec_install_basedir }}" 
+    state: absent
+  become: yes
+  when: terraform_tfsec_remove_previous_versions
+
+- name: Download tflint
+  get_url:
+    dest: /tmp
+    url: "{{ terraform_tflint_url }}"
+    checksum: "{{ terraform_tflint_checksum }}" 
+    mode: 0755 
+  register: tflint_download
+  when: terraform_tflint_install
+  changed_when: False
+
+- name: Create tflint installation dir.
+  file:
+    path: "{{ terraform_tflint_install_path }}" 
+    state: directory
+    owner: "root"  
+    group: "root"  
+    mode: "u=rwx,go=rx"  
+  become: true
+
+- name: Extract tflint archive
+  unarchive:
+    src: "{{ tflint_download.dest }}"
+    dest: "{{ terraform_tflint_install_path }}"
+    remote_src: yes
+  when: terraform_tflint_install
+  become: true
+
+- name: Create tflint symlink
+  file:
+    src: "{{ terraform_tflint_install_path }}/tflint"
+    dest: "{{ terraform_tflint_bin }}"
+    owner: root
+    group: root
+    state: link
+    force: true
+  become: true
+
+- name: Create tfsec installation dir.
+  file:
+    path: "{{ terraform_tfsec_install_path }}" 
+    state: directory
+    owner: "root"  
+    group: "root"  
+    mode: "u=rwx,go=rx"  
+  become: true
+
+- name: Download and install tfsec
+  get_url:
+    dest: "{{ terraform_tfsec_install_path }}/tfsec"
+    url: "{{ terraform_tfsec_url }}"
+    checksum: "{{ terraform_tfsec_checksum }}"
+    mode: 0755 
+  register: tfsec_download
+  when: terraform_tfsec_install
+  become: true
+
+- name: Create tfsec symlink
+  file:
+    src: "{{ terraform_tfsec_install_path }}/tfsec"
+    dest: "{{ terraform_tfsec_bin }}"
+    owner: root
+    group: root
+    state: link
+    force: true
+  become: true
+
+- name: Cleaning up downloaded files.
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ tflint_download.dest }}" 
+  changed_when: False

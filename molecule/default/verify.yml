@@ -3,11 +3,15 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Check binary file
+    - name: Include role defaults vars
+      with_first_found:
+        - "../../defaults/main.yml"
+      include_vars: "{{ item }}"
+    - name: Check terraform binary file
       stat:
         path: /usr/bin/terraform
       register: bin
-    - name: Assert that terraform is installed
+    - name: Assert that terraform binary is installed
       assert:
         that:
           - "bin.stat.exists"
@@ -18,3 +22,33 @@
       assert:
         that:
         - "'Terraform' in output.stdout"
+    - name: Check tflint binary file
+      stat:
+        path: "{{ terraform_tflint_install_path }}/tflint"
+      register: bin
+    - name: Assert that tflint is installed
+      assert:
+        that:
+          - "bin.stat.exists"
+    - name: Check tflint execution
+      command: tflint --version
+      register: output
+    - name: Assert that tflint is installed
+      assert:
+        that:
+        - "'TFLint version {{ terraform_tflint_version }}' in output.stdout"
+    - name: Check tfsec binary file
+      stat:
+        path: "{{ terraform_tfsec_bin | dirname }}/tfsec"
+      register: bin
+    - name: Assert that tfsec is installed
+      assert:
+        that:
+          - "bin.stat.exists"
+    - name: Check tfsec execution
+      command: tfsec --version
+      register: output
+    - name: Assert that tfsec is installed
+      assert:
+        that:
+        - "'{{ terraform_tfsec_version }}' in output.stdout"

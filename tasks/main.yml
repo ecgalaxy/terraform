@@ -37,3 +37,6 @@
     name: terraform
     state: present
   become: true
+
+- name: Include extras
+  include_tasks: ./install_extras.yml

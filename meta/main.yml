@@ -19,4 +19,5 @@ galaxy_info:
     - bionic
     - focal
   galaxy_tags: []
-dependencies: []
+dependencies:
+    - role: common_packages

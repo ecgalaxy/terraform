@@ -1,10 +1,9 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: "Include terraform"
-      include_role:
-        name: "terraform"
+  roles:
+    - role: common_packages
+    - role: terraform
   environment:
     http_proxy: "{{ lookup('env', 'http_proxy') }}"
     https_proxy: "{{ lookup('env', 'https_proxy') }}"
