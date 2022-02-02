@@ -20,4 +20,4 @@ galaxy_info:
     - focal
   galaxy_tags: []
 dependencies:
-    - role: common_packages
+    - ecgalaxy.common_packages
