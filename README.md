@@ -1,10 +1,12 @@
 ECGALAXY terraform role
 =======================
 
-The role installs HashiCorp Terraform - https://www.terraform.io/
+This Ansible role installs HashiCorp Terraform - https://www.terraform.io/
+
 The following additional tools are also installed:
+
 - `tflint`: performs the linting of the code.
-- `tfsec`: performs static code analysis of terraform files.
+- `tfsec`: performs static code analysis of Terraform files.
 
 Requirements
 ------------
@@ -32,7 +34,9 @@ Example Playbook
 License
 -------
 
-EUPL-1.2
+Copyright the European Union 2022.
+
+Licensed under the EUPL-1.2 or later.
 
 Author Information
 ------------------

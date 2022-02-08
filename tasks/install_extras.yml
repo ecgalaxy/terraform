@@ -1,15 +1,14 @@
 ---
-
 - name: Tflint remove previous version
   file:
-    path: "{{ terraform_tflint_install_basedir }}" 
+    path: "{{ terraform_tflint_install_basedir }}"
     state: absent
   become: yes
   when: terraform_tflint_remove_previous_versions
 
 - name: Tfsec remove previous version
   file:
-    path: "{{ terraform_tfsec_install_basedir }}" 
+    path: "{{ terraform_tfsec_install_basedir }}"
     state: absent
   become: yes
   when: terraform_tfsec_remove_previous_versions
@@ -18,19 +17,19 @@
   get_url:
     dest: /tmp
     url: "{{ terraform_tflint_url }}"
-    checksum: "{{ terraform_tflint_checksum }}" 
-    mode: 0755 
+    checksum: "{{ terraform_tflint_checksum }}"
+    mode: 0755
   register: tflint_download
   when: terraform_tflint_install
   changed_when: False
 
-- name: Create tflint installation dir.
+- name: Create tflint installation dir
   file:
-    path: "{{ terraform_tflint_install_path }}" 
+    path: "{{ terraform_tflint_install_path }}"
     state: directory
-    owner: "root"  
-    group: "root"  
-    mode: "u=rwx,go=rx"  
+    owner: "root"
+    group: "root"
+    mode: "u=rwx,go=rx"
   become: true
 
 - name: Extract tflint archive
@@ -51,13 +50,13 @@
     force: true
   become: true
 
-- name: Create tfsec installation dir.
+- name: Create tfsec installation dir
   file:
-    path: "{{ terraform_tfsec_install_path }}" 
+    path: "{{ terraform_tfsec_install_path }}"
     state: directory
-    owner: "root"  
-    group: "root"  
-    mode: "u=rwx,go=rx"  
+    owner: "root"
+    group: "root"
+    mode: "u=rwx,go=rx"
   become: true
 
 - name: Download and install tfsec
@@ -65,7 +64,7 @@
     dest: "{{ terraform_tfsec_install_path }}/tfsec"
     url: "{{ terraform_tfsec_url }}"
     checksum: "{{ terraform_tfsec_checksum }}"
-    mode: 0755 
+    mode: 0755
   register: tfsec_download
   when: terraform_tfsec_install
   become: true
@@ -80,10 +79,10 @@
     force: true
   become: true
 
-- name: Cleaning up downloaded files.
+- name: Cleaning up downloaded files
   file:
     path: "{{ item }}"
     state: absent
   with_items:
-    - "{{ tflint_download.dest }}" 
+    - "{{ tflint_download.dest }}"
   changed_when: False
