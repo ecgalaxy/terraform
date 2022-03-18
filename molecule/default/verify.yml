@@ -6,49 +6,49 @@
     - name: Include role defaults vars
       with_first_found:
         - "../../defaults/main.yml"
-      include_vars: "{{ item }}"
+      ansible.builtin.include_vars: "{{ item }}"
     - name: Check terraform binary file
-      stat:
+      ansible.builtin.stat:
         path: /usr/bin/terraform
       register: bin
     - name: Assert that terraform binary is installed
-      assert:
+      ansible.builtin.assert:
         that:
           - "bin.stat.exists"
     - name: Check terraform execution
-      command: terraform -version
+      ansible.builtin.command: terraform -version
       register: output
     - name: Assert that terraform is installed
-      assert:
+      ansible.builtin.assert:
         that:
         - "'Terraform' in output.stdout"
     - name: Check tflint binary file
-      stat:
+      ansible.builtin.stat:
         path: "{{ terraform_tflint_install_path }}/tflint"
       register: bin
     - name: Assert that tflint is installed
-      assert:
+      ansible.builtin.assert:
         that:
           - "bin.stat.exists"
     - name: Check tflint execution
-      command: tflint --version
+      ansible.builtin.command: tflint --version
       register: output
     - name: Assert that tflint is installed
-      assert:
+      ansible.builtin.assert:
         that:
         - "'TFLint version {{ terraform_tflint_version }}' in output.stdout"
     - name: Check tfsec binary file
-      stat:
+      ansible.builtin.stat:
         path: "{{ terraform_tfsec_bin | dirname }}/tfsec"
       register: bin
     - name: Assert that tfsec is installed
-      assert:
+      ansible.builtin.assert:
         that:
           - "bin.stat.exists"
     - name: Check tfsec execution
-      command: tfsec --version
+      ansible.builtin.command: tfsec --version
       register: output
     - name: Assert that tfsec is installed
-      assert:
+      ansible.builtin.assert:
         that:
         - "'{{ terraform_tfsec_version }}' in output.stdout"

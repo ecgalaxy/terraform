@@ -1,20 +1,20 @@
 ---
 - name: Include OS-specific variables
-  include_vars: "{{ ansible_os_family }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Include Distribution-specific variables (Amazon Linux)
-  include_vars: "{{ ansible_distribution }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
   when: ansible_distribution == 'Amazon'
 
 - name: Import key (APT)
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ hashicorp_repository }}/gpg"
     state: present
   become: true
   when: ansible_os_family == 'Debian'
 
 - name: Enable hashicorp repository (APT)
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [arch=amd64] {{ hashicorp_repository }} {{ ansible_distribution_release | lower }} main"
     filename: hashicorp
     state: present
@@ -22,7 +22,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: Enable hashicorp repository (Yum)
-  yum_repository:
+  ansible.builtin.yum_repository:
     name: hashicorp
     description: HashiCorp repository
     state: present
@@ -33,10 +33,10 @@
   when: ansible_os_family == 'RedHat'
 
 - name: Install terraform
-  package:
+  ansible.builtin.package:
     name: terraform
     state: present
   become: true
 
 - name: Include extras
-  include_tasks: ./install_extras.yml
+  ansible.builtin.include_tasks: ./install_extras.yml

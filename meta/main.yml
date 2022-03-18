@@ -2,7 +2,7 @@
 galaxy_info:
   name: terraform
   author: ecgalaxy
-  description: HashiCorp Terraform
+  description: Installs HashiCorp Terraform, tflint and tfsec
   company: European Commission
   license: EUPL-1.2
   min_ansible_version: 2.5
