@@ -1,5 +1,9 @@
 # Releases
 
+## 1.2.x
+
+- tflint v0.40.0, with major changes to the plugin system, see https://github.com/terraform-linters/tflint/releases/tag/v0.40.0
+
 ## 1.1.x
 
 - tflint and tfsec updates.
