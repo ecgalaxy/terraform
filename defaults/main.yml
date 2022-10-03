@@ -1,8 +1,8 @@
 ---
 terraform_tflint_install: True
-terraform_tflint_version: 0.40.0
+terraform_tflint_version: 0.41.0
 terraform_tflint_url: "https://github.com/terraform-linters/tflint/releases/download/v{{ terraform_tflint_version }}/tflint_linux_amd64.zip"
-terraform_tflint_checksum: "sha256:9764aa7305466ad8d9870fd60d6de51a3536b6963d6456fca3127b4e5ceb2fbf"
+terraform_tflint_checksum: "sha256:653aa84f25d49f2d8978c619ba13b9ef595eb781ba950e389fbeab1ac496df22"
 terraform_tflint_install_basedir: "/opt/tflint"
 terraform_tflint_install_path: "{{ terraform_tflint_install_basedir }}/{{ terraform_tflint_version }}"
 terraform_tflint_bin: "/usr/local/bin/tflint"
