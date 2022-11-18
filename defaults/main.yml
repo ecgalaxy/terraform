@@ -1,17 +1,17 @@
 ---
 terraform_tflint_install: True
-terraform_tflint_version: 0.41.0
+terraform_tflint_version: 0.42.2
 terraform_tflint_url: "https://github.com/terraform-linters/tflint/releases/download/v{{ terraform_tflint_version }}/tflint_linux_amd64.zip"
-terraform_tflint_checksum: "sha256:653aa84f25d49f2d8978c619ba13b9ef595eb781ba950e389fbeab1ac496df22"
+terraform_tflint_checksum: "sha256:f8ae2758f5b6dcf2d9fecc2b0d7c2cce094112635a13b1f9734a5d0bce8b6e83"
 terraform_tflint_install_basedir: "/opt/tflint"
 terraform_tflint_install_path: "{{ terraform_tflint_install_basedir }}/{{ terraform_tflint_version }}"
 terraform_tflint_bin: "/usr/local/bin/tflint"
 terraform_tflint_remove_previous_versions: False
 
 terraform_tfsec_install: True
-terraform_tfsec_version: 1.28.0
+terraform_tfsec_version: 1.28.1
 terraform_tfsec_url: "https://github.com/aquasecurity/tfsec/releases/download/v{{ terraform_tfsec_version }}/tfsec-linux-amd64"
-terraform_tfsec_checksum: "sha256:754c6f591e3110ca67c6b591921df86f7fcb28e12995dbfae7453e472de54f3b"
+terraform_tfsec_checksum: "sha256:17c1bd99ebe13be77ac775651bc61f44b2b4409b4578485f1168eab8c3e97507"
 terraform_tfsec_install_basedir: "/opt/tfsec"
 terraform_tfsec_install_path: "{{ terraform_tfsec_install_basedir }}/{{ terraform_tfsec_version }}"
 terraform_tfsec_bin: "/usr/local/bin/tfsec"
