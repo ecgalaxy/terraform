@@ -7,15 +7,17 @@
   when: ansible_distribution == 'Amazon'
 
 - name: Import key (APT)
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: "{{ hashicorp_repository }}/gpg"
-    state: present
+    dest: "{{ hashicorp_keyring }}"
+    mode: '0644'
+    force: true
   become: true
   when: ansible_os_family == 'Debian'
 
 - name: Enable hashicorp repository (APT)
   ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64] {{ hashicorp_repository }} {{ ansible_distribution_release | lower }} main"
+    repo: "deb [arch=amd64 signed-by={{ hashicorp_keyring }}] {{ hashicorp_repository }} {{ ansible_distribution_release | lower }} main"
     filename: hashicorp
     state: present
   become: true
