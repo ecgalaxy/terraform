@@ -15,6 +15,14 @@
   become: true
   when: ansible_os_family == 'Debian'
 
+- name: Disable hashicorp repository not using keyring (APT)
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] {{ hashicorp_repository }} {{ ansible_distribution_release | lower }} main"
+    filename: hashicorp
+    state: absent
+  become: true
+  when: ansible_os_family == 'Debian'
+
 - name: Enable hashicorp repository (APT)
   ansible.builtin.apt_repository:
     repo: "deb [arch=amd64 signed-by={{ hashicorp_keyring }}] {{ hashicorp_repository }} {{ ansible_distribution_release | lower }} main"
