@@ -11,7 +11,7 @@ The following additional tools are also installed:
 Requirements
 ------------
 
-None.
+- The `unzip` command, which can be provided by `ecgalaxy.common_packages`.
 
 Role Variables
 --------------
@@ -21,7 +21,7 @@ See `vars` and `defaults` folders.
 Dependencies
 ------------
 
-- ecgalaxy.common_packages
+- optional: ecgalaxy.common_packages
 
 Example Playbook
 ----------------
