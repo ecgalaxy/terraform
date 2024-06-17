@@ -1,5 +1,9 @@
 # Releases
 
+## 2.0.x
+
+- Ubuntu 18.04 LTS support removed.
+
 ## 1.3.x
 
 - tflint v0.50.x, includes breaking changes, see upstream release notes.

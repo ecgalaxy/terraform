@@ -38,7 +38,7 @@
     state: present
     baseurl: "{{ hashicorp_repository }}/{{ hashicorp_rpm_family }}/$releasever/$basearch/stable"
     gpgkey: "{{ hashicorp_repository }}/gpg"
-    gpgcheck: yes
+    gpgcheck: true
   become: true
   when: ansible_os_family == 'RedHat'
 

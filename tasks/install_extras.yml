@@ -3,14 +3,14 @@
   ansible.builtin.file:
     path: "{{ terraform_tflint_install_basedir }}"
     state: absent
-  become: yes
+  become: true
   when: terraform_tflint_remove_previous_versions
 
 - name: Remove previous tfsec version
   ansible.builtin.file:
     path: "{{ terraform_tfsec_install_basedir }}"
     state: absent
-  become: yes
+  become: true
   when: terraform_tfsec_remove_previous_versions
 
 - name: Download tflint
@@ -18,10 +18,10 @@
     dest: /tmp
     url: "{{ terraform_tflint_url }}"
     checksum: "{{ terraform_tflint_checksum }}"
-    mode: 0755
+    mode: "u=rwx,go=rx"
   register: tflint_download
   when: terraform_tflint_install
-  changed_when: False
+  changed_when: false
 
 - name: Create tflint installation dir
   ansible.builtin.file:
@@ -36,7 +36,7 @@
   ansible.builtin.unarchive:
     src: "{{ tflint_download.dest }}"
     dest: "{{ terraform_tflint_install_path }}"
-    remote_src: yes
+    remote_src: true
   when: terraform_tflint_install
   become: true
 
@@ -64,7 +64,7 @@
     dest: "{{ terraform_tfsec_install_path }}/tfsec"
     url: "{{ terraform_tfsec_url }}"
     checksum: "{{ terraform_tfsec_checksum }}"
-    mode: 0755
+    mode: "u=rwx,go=rx"
   register: tfsec_download
   when: terraform_tfsec_install
   become: true
@@ -85,4 +85,4 @@
     state: absent
   with_items:
     - "{{ tflint_download.dest }}"
-  changed_when: False
+  changed_when: false
