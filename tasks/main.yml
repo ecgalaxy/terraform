@@ -10,7 +10,7 @@
   ansible.builtin.get_url:
     url: "{{ hashicorp_repository }}/gpg"
     dest: "{{ hashicorp_keyring }}"
-    mode: '0644'
+    mode: 'u=rw,go=r'
     force: true
   become: true
   when: ansible_os_family == 'Debian'

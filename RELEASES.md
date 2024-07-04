@@ -1,5 +1,9 @@
 # Releases
 
+## 3.0.x
+
+- RHEL 7 support removed.
+
 ## 2.0.x
 
 - Ubuntu 18.04 LTS support removed.
