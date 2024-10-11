@@ -1,5 +1,9 @@
 # Releases
 
+## 3.1.x
+
+- RHEL 9 and Ubuntu 24.04 LTS support added.
+
 ## 3.0.x
 
 - RHEL 7 support removed.
