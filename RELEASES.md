@@ -1,5 +1,9 @@
 # Releases
 
+## 4.0.x
+
+- Ubuntu 20.04 LTS support removed.
+
 ## 3.1.x
 
 - RHEL 9 and Ubuntu 24.04 LTS support added.
